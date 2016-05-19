@@ -1,6 +1,6 @@
 # gnip-insights
 
-Gnip Insights is a NodeJS client for (Gnip insights endpoints)[https://gnip.com/insights/].
+Gnip Insights is a NodeJS client for [Gnip insights endpoints](https://gnip.com/insights/).
 
 ### Methods
 
