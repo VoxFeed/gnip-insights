@@ -1,0 +1,26 @@
+{
+  "name": "gnip-insights",
+  "version": "0.1.0",
+  "description": "Gnip client for Insights endpoints",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VoxFeed/gnip-insights.git"
+  },
+  "keywords": [
+    "Gnip",
+    "Insights"
+  ],
+  "author": "VoxFeed",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/VoxFeed/gnip-insights/issues"
+  },
+  "homepage": "https://github.com/VoxFeed/gnip-insights#readme",
+  "dependencies": {
+    "oauth": "^0.9.14"
+  }
+}
