@@ -1,0 +1,23 @@
+{
+  "start": "2015-11-17T22:00:00Z",
+  "end": "2015-11-19T02:00:00Z",
+  "errors": ["1 Tweet ID(s) are unavailable"],
+  "unavailable_tweet_ids": ["323456789"],
+  "totals": {
+    "423456789": {
+      "favorites": "67",
+      "replies": "8",
+      "retweets": 26
+    },
+    "123456789": {
+      "favorites": "109",
+      "replies": "41",
+      "retweets": "88"
+    },
+    "223456789": {
+      "favorites": "0",
+      "replies": "2",
+      "retweets": "0"
+    }
+  }
+}
