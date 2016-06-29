@@ -43,6 +43,21 @@ test('it should return object when json response', (assert) => {
   });
 });
 
+test('it should return response by promise', (assert) => {
+  nock(API_URL).post('/' + TOTALS_PATH).reply(200, gnipResponse);
+
+  const request = gnip(credentials);
+
+  request(TOTALS_PATH, {})
+    .then((data) => {
+      assert.equal(data.errors.length, 1);
+      assert.equal(data.totals['423456789'].favorites, '67');
+      assert.end();
+    })
+    .catch(assert.end)
+    .finally(nock.cleanAll);
+});
+
 test('it should return error when request fails', (assert) => {
   nock(API_URL).post('/' + TOTALS_PATH).reply(500);
 
