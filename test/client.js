@@ -24,7 +24,7 @@ test('it should throw bad credentials error', (assert) => {
     error = err;
   }
 
-  assert.equal(error.message, 'invalid credentials');
+  assert.equal(error.name, 'INVALID_CREDENTIALS');
   assert.end();
 });
 
@@ -55,9 +55,7 @@ test('it should return error when request fails', (assert) => {
 
   request(TOTALS_PATH, {})
     .then(data => assert.end(new Error('unexpected data:' + data)))
-    .catch(err => {
-      assert.equal(!!err, true);
-    })
+    .catch(err => assert.equal(err.name, 'REQUEST_FAILED'))
     .then(() => {
       nock.cleanAll();
       assert.end();
