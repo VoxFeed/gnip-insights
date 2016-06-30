@@ -10,10 +10,10 @@ const API_URL = 'https://data-api.twitter.com';
 const TOTALS_PATH = 'insights/engagement/totals';
 
 const credentials = {
-  consumerKey: 'consumerKey',
-  consumerSecret: 'consumerSecret',
-  accessToken: 'accessToken',
-  accessTokenSecret: 'accessTokenSecret'
+  consumer_key: 'consumerKey',
+  consumer_secret: 'consumerSecret',
+  token: 'accessToken',
+  token_secret: 'accessTokenSecret'
 };
 
 test('it should throw bad credentials error', (assert) => {
@@ -29,33 +29,23 @@ test('it should throw bad credentials error', (assert) => {
 });
 
 test('it should return object when json response', (assert) => {
-  nock(API_URL).post('/' + TOTALS_PATH).reply(200, gnipResponse);
-
-  const request = gnip(credentials);
-
-  request(TOTALS_PATH, {}, (error, data) => {
-    if (error) return assert.end(error);
-    assert.equal(data.errors.length, 1);
-    assert.equal(data.totals['423456789'].favorites, '67');
-
-    nock.cleanAll();
-    assert.end();
-  });
-});
-
-test('it should return response by promise', (assert) => {
-  nock(API_URL).post('/' + TOTALS_PATH).reply(200, gnipResponse);
+  nock(API_URL)
+    .post('/' + TOTALS_PATH)
+    .reply(200, gnipResponse);
 
   const request = gnip(credentials);
 
   request(TOTALS_PATH, {})
-    .then((data) => {
+    .then(data => {
       assert.equal(data.errors.length, 1);
       assert.equal(data.totals['423456789'].favorites, '67');
-      assert.end();
+      nock.cleanAll();
     })
-    .catch(assert.end)
-    .finally(nock.cleanAll);
+    .then(() => assert.end())
+    .catch(err => {
+      nock.cleanAll();
+      assert.end(err);
+    });
 });
 
 test('it should return error when request fails', (assert) => {
@@ -63,11 +53,17 @@ test('it should return error when request fails', (assert) => {
 
   const request = gnip(credentials);
 
-  request(TOTALS_PATH, {}, (error, data) => {
-    if (data) return assert.end(new Error('unexpected data'));
-    assert.equal(!!error, true);
-
-    nock.cleanAll();
-    assert.end();
-  });
+  request(TOTALS_PATH, {})
+    .then(data => assert.end(new Error('unexpected data:' + data)))
+    .catch(err => {
+      assert.equal(!!err, true);
+    })
+    .then(() => {
+      nock.cleanAll();
+      assert.end();
+    })
+    .catch(err => {
+      nock.cleanAll();
+      assert.end(err);
+    });
 });

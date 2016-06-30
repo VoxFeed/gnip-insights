@@ -23,7 +23,8 @@
   "homepage": "https://github.com/VoxFeed/gnip-insights#readme",
   "dependencies": {
     "bluebird": "^3.4.0",
-    "oauth": "^0.9.14"
+    "oauth": "^0.9.14",
+    "request": "^2.72.0"
   },
   "devDependencies": {
     "eslint": "^2.10.2",
