@@ -41,9 +41,10 @@ const requestParams = {
   }
 };
 
-gnipClient.post('insights/engagement/totals', requestParams, function (error, data, response) {
-    if (error) return console.log(error);
-    console.log(data);
- });
+gnipClient.post('insights/engagement/totals', requestParams)
+  .then(response => {
+    console.log(response);
+  })
+  .catch(console.log);
 
 ```
