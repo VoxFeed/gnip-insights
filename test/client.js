@@ -34,7 +34,8 @@ test('it should return object when json response', (assert) => {
   const request = gnip(credentials);
 
   request(TOTALS_PATH, {})
-    .then(data => {
+    .then(response => {
+      const {body: data} = response;
       assert.equal(data.errors.length, 1);
       assert.equal(data.totals['423456789'].favorites, '67');
       nock.cleanAll();
